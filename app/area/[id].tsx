@@ -1,7 +1,6 @@
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { FlatList, Pressable, Text, View } from "react-native";
-
-import { AREAS, CARE_CARDS } from "../_data";
+import { AREAS, CARE_CARDS } from "../../data";
 
 export default function AreaScreen() {
   const router = useRouter();
@@ -28,20 +27,15 @@ export default function AreaScreen() {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <Pressable
-              onPress={() =>
-                router.push({
-                  pathname: "/carecard/[id]",
-                  params: { id: item.id },
-                })
-              }
               style={{
                 padding: 16,
                 marginBottom: 12,
+                backgroundColor: "#fff",
                 borderRadius: 12,
-                backgroundColor: "#f2f2f2",
               }}
+              onPress={() => router.push(`/carecard/${item.id}`)}
             >
-              <Text style={{ fontSize: 18, fontWeight: "600" }}>
+              <Text style={{ fontSize: 16, fontWeight: "600" }}>
                 {item.title}
               </Text>
             </Pressable>

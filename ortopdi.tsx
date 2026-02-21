@@ -1,26 +1,40 @@
 import { useRouter } from "expo-router";
 import { Pressable, ScrollView, Text } from "react-native";
-
-import ortopedi from "../../_data/areas/ortopedi";
-import { CARE_CARDS } from "../../_data/careCards";
+import { CARE_CARDS, type CareCard } from "../../data/careCards";
 
 export default function OrtopediScreen() {
   const router = useRouter();
 
-  const cards = CARE_CARDS.filter((card) =>
-    ortopedi.includes(card.id)
+  // Filtrera kort som tillhör ortopedi
+  const ORTOPEDI_CARDS: CareCard[] = CARE_CARDS.filter(
+    (card) => card.area === "ortopedi"
   );
 
   return (
     <ScrollView style={{ padding: 16 }}>
-      {cards.map((card) => (
+      <Text
+        style={{
+          fontSize: 24,
+          fontWeight: "700",
+          marginBottom: 16,
+        }}
+      >
+        Ortopedi
+      </Text>
+
+      {ORTOPEDI_CARDS.map((item) => (
         <Pressable
-          key={card.id}
-          onPress={() => router.push(`/card/${card.id}`)}
-          style={{ marginBottom: 12 }}
+          key={item.id}
+          onPress={() => router.push(`/carecard/${item.id}`)}
+          style={{
+            padding: 16,
+            backgroundColor: "#f2f2f2",
+            borderRadius: 12,
+            marginBottom: 12,
+          }}
         >
-          <Text style={{ fontSize: 18 }}>
-            {card.title}
+          <Text style={{ fontSize: 16, fontWeight: "600" }}>
+            {item.title}
           </Text>
         </Pressable>
       ))}

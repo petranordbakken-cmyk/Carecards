@@ -1,11 +1,11 @@
-import { CARE_CARDS } from "@/app/_data/careCards";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
+import { CARE_CARDS } from "../../data";
 
 export default function CareCardScreen() {
-  const params = useLocalSearchParams();
+  const params = useLocalSearchParams<{ id?: string | string[] }>();
 
-  // 🔒 SÄKER ID-HANTERING
+  // Säker id-hantering
   const rawId = params.id;
   const id = Array.isArray(rawId) ? rawId[0] : rawId;
 
